@@ -1,15 +1,16 @@
-def call(Map params) {
-    pipeline {
-        agent any
+def call(Map config = [:]) {
+    def target = config.target ?: 'linux64'
+    def arch = config.arch ?: 'x86_64'
+    def type = config.type ?: 'Release'
 
-        stages {
-            stage("Build: ${params.target}") {
-                steps {
-                    echo "Target: ${params.target}"
-                    echo "Arch: ${params.arch}"
-                    echo "Build Type: ${params.type}"
-                }
-            }
+    script {
+        def dynamicStage = "${target} setup build"
+
+        stage(dynamicStage) {
+            echo "Building for ${target}"
+            echo "Architecture: ${arch}"
+            echo "Build Type: ${type}"
+            // ممكن تحط هنا build steps زي sh أو bat أو أي حاجة
         }
     }
 }
