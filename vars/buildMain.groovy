@@ -1,7 +1,7 @@
-def call(Map config = [:]) {
-    def target = config.target ?: 'linux64'
-    def arch = config.arch ?: 'x86_64'
-    def type = config.type ?: 'Release'
+def call(Map config) {
+    def target = config.target
+    def arch = config.arch
+    def type = config.type
 
     script {
         def dynamicStage = "${target} setup build"
